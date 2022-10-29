@@ -6,21 +6,28 @@ const Login = () => {
     email: "",
     password: "",
   });
+  //   const [grabUser, setGrabUser] = useState("");
 
   const handleInputChange = (e) => {
     setRegisteredUser({ ...registeredUser, [e.target.name]: e.target.value });
   };
 
+  const { email, password } = registeredUser;
+
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const user = JSON.parse(localStorage.getItem("userdata"));
+    const users = JSON.parse(localStorage.getItem("userdata"));
 
-    if (
-      registeredUser.email === user.email &&
-      registeredUser.password === user.password
-    ) {
-      console.log("Welcome back, ", user.name);
+    const checkUserExists = (existingEmail, existingPassword) =>
+      users?.some(
+        (account) =>
+          account.email === existingEmail &&
+          account.password === existingPassword
+      );
+
+    if (checkUserExists(email, password)) {
+      console.log("Welcome back, ");
       setErrMsg(false);
     } else {
       setErrMsg("Username or password is incorrect!");

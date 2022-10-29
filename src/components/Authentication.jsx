@@ -40,7 +40,7 @@ const Authentication = () => {
       <div>
         {notification.text}
         <button onClick={() => handleNavigation()}>
-          {notification.button} 123
+          {notification.button}
         </button>
       </div>
     </div>

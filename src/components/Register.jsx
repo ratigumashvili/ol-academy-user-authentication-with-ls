@@ -1,33 +1,51 @@
 import { useState } from "react";
 
-const Register = ({ setNavigation, handleNavigation }) => {
+const Register = ({ handleNavigation }) => {
   const [errMsg, setErrMsg] = useState(false);
-  const [user, setUser] = useState({
+  const [users, setUsers] = useState([]);
+  const [userInput, setUserInput] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  const { name, email, password } = user;
+  const { name, email, password } = userInput;
+
+  const checkEmail = (newEmail) =>
+    users?.some((user) => user.email === newEmail);
 
   const handleInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value.trim() });
+    setUserInput({ ...userInput, [e.target.name]: e.target.value.trim() });
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (name.length !== 0 && email.length !== 0 && password.length !== 0) {
-      localStorage.setItem("userdata", JSON.stringify(user));
-      setUser({
-        name: "",
-        email: "",
-        password: "",
-      });
-      handleNavigation();
-      setNavigation("login");
-    } else {
+
+    const newUser = {
+      name: name,
+      email: email,
+      password: password,
+      id: Date.now(),
+    };
+
+    if (!name || !email || !password) {
       setErrMsg("Fields should not be empty");
+      return;
     }
+    if (checkEmail(newUser.email)) {
+      setErrMsg("Email allready registered");
+      return;
+    }
+    setErrMsg("");
+    setUsers([...users, newUser]);
+
+    localStorage.setItem("userdata", JSON.stringify(users));
+    setUserInput({
+      name: "",
+      email: "",
+      password: "",
+    });
+    // handleNavigation();
   };
   return (
     <>
@@ -39,7 +57,7 @@ const Register = ({ setNavigation, handleNavigation }) => {
           name="name"
           placeholder="Name"
           autoComplete="off"
-          value={user.name}
+          value={name}
           onChange={handleInputChange}
         />
         <input
@@ -47,7 +65,7 @@ const Register = ({ setNavigation, handleNavigation }) => {
           name="email"
           placeholder="Email"
           autoComplete="off"
-          value={user.email}
+          value={email}
           onChange={handleInputChange}
         />
         <input
@@ -55,7 +73,7 @@ const Register = ({ setNavigation, handleNavigation }) => {
           name="password"
           placeholder="Password"
           autoComplete="off"
-          value={user.password}
+          value={password}
           onChange={handleInputChange}
         />
         <button type="submit">Submit</button>
