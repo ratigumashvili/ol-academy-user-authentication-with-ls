@@ -40,11 +40,11 @@ const Register = ({ handleNavigation }) => {
     setUsers([...users, newUser]);
 
     localStorage.setItem("userdata", JSON.stringify(users));
-    setUserInput({
-      name: "",
-      email: "",
-      password: "",
-    });
+    // setUserInput({
+    //   name: "",
+    //   email: "",
+    //   password: "",
+    // });
     // handleNavigation();
   };
   return (

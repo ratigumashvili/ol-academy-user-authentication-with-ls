@@ -6,7 +6,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  //   const [grabUser, setGrabUser] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState("");
 
   const handleInputChange = (e) => {
     setRegisteredUser({ ...registeredUser, [e.target.name]: e.target.value });
@@ -26,8 +26,12 @@ const Login = () => {
           account.password === existingPassword
       );
 
+    const valueIs = (value) => (object) =>
+      Object.values(object).some((v) => v === value);
+
     if (checkUserExists(email, password)) {
-      console.log("Welcome back, ");
+      setLoggedInUser(users.filter(valueIs(email)));
+      console.log("Welcome back, ", loggedInUser[0]?.name);
       setErrMsg(false);
     } else {
       setErrMsg("Username or password is incorrect!");
