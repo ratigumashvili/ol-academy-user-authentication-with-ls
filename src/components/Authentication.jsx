@@ -25,6 +25,15 @@ const Authentication = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("lastLoggedInUser")) {
+      const user = JSON.parse(localStorage.getItem("lastLoggedInUser"));
+      setLoggedInUser(user);
+    } else {
+      setLoggedInUser("");
+    }
+  }, []);
+
   const [loggedInUser, setLoggedInUser] = useState("");
 
   if (navigation === "endscreen" || isLoggedIn) {
@@ -50,6 +59,7 @@ const Authentication = () => {
         <>
           <Login
             users={users}
+            loggedInUser={loggedInUser}
             setLoggedInUser={setLoggedInUser}
             setNavigation={setNavigation}
           />
