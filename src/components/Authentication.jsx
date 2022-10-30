@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Register from "./Register";
 import Login from "./Login";
 
 const Authentication = () => {
   const [navigation, setNavigation] = useState("registration");
   const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    if (localStorage.getItem("userdata")) {
+      const usersData = JSON.parse(localStorage.getItem("userdata"));
+      setUsers(usersData);
+    }
+  }, []);
+
   const [notification, setNotification] = useState({
     text: "Allready have an account?",
     button: "Login",
