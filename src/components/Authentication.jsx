@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Register from "./Register";
 import Login from "./Login";
+import EndScreen from "./EndScreen";
 
 const Authentication = () => {
   const [navigation, setNavigation] = useState("registration");
@@ -13,6 +14,7 @@ const Authentication = () => {
     }
   }, []);
 
+  const [loggedInUser, setLoggedInUser] = useState("");
   const [notification, setNotification] = useState({
     text: "Allready have an account?",
     button: "Login",
@@ -35,6 +37,12 @@ const Authentication = () => {
     }
   };
 
+  if (navigation === "endscreen") {
+    return (
+      <EndScreen loggedInUser={loggedInUser} setNavigation={setNavigation} />
+    );
+  }
+
   return (
     <div>
       <h1>Authentication</h1>
@@ -46,7 +54,12 @@ const Authentication = () => {
           setUsers={setUsers}
         />
       ) : (
-        <Login users={users} />
+        <Login
+          users={users}
+          loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
+          setNavigation={setNavigation}
+        />
       )}
       <div>
         {notification.text}
@@ -62,6 +75,9 @@ const Authentication = () => {
             </span>{" "}
             <span>
               <b>Email:</b> {user.email}
+            </span>
+            <span>
+              <b>Pass:</b> {user.password}
             </span>
           </p>
         ))}

@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-const Login = ({ users }) => {
+const Login = ({ users, setNavigation, loggedInUser, setLoggedInUser }) => {
   const [errMsg, setErrMsg] = useState(false);
   const [registeredUser, setRegisteredUser] = useState({
     email: "",
     password: "",
   });
-  const [loggedInUser, setLoggedInUser] = useState("");
 
   const handleInputChange = (e) => {
     setRegisteredUser({ ...registeredUser, [e.target.name]: e.target.value });
@@ -16,8 +15,6 @@ const Login = ({ users }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // const users = JSON.parse(localStorage.getItem("userdata"));
 
     const checkUserExists = (existingEmail, existingPassword) =>
       users?.some(
@@ -30,9 +27,9 @@ const Login = ({ users }) => {
       Object.values(object).some((v) => v === value);
 
     if (checkUserExists(email, password)) {
-      setLoggedInUser(users.filter(valueIs(email)));
-      // console.log("Welcome back, ", loggedInUser[0]?.name);
       setErrMsg(false);
+      setLoggedInUser(users.filter(valueIs(email)));
+      setNavigation("endscreen");
     } else {
       setLoggedInUser("");
       setErrMsg("Username or password is incorrect!");
@@ -44,7 +41,6 @@ const Login = ({ users }) => {
     <>
       <h3>Login</h3>
       {errMsg && <p>{errMsg}</p>}
-      {loggedInUser && <h3>Hello, {loggedInUser[0]?.name}</h3>}
       <form onSubmit={handleLogin}>
         <input
           type="text"
