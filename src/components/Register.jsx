@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-const Register = ({ handleNavigation }) => {
+const Register = ({ handleNavigation, users, setUsers }) => {
   const [errMsg, setErrMsg] = useState(false);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [userInput, setUserInput] = useState({
     name: "",
     email: "",
@@ -11,12 +11,12 @@ const Register = ({ handleNavigation }) => {
 
   const { name, email, password } = userInput;
 
-  const checkEmail = (newEmail) =>
-    users?.some((user) => user.email === newEmail);
-
   const handleInputChange = (e) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value.trim() });
   };
+
+  const checkEmail = (newEmail) =>
+    users?.some((user) => user.email === newEmail);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -25,7 +25,6 @@ const Register = ({ handleNavigation }) => {
       name: name,
       email: email,
       password: password,
-      id: Date.now(),
     };
 
     if (!name || !email || !password) {
@@ -39,7 +38,9 @@ const Register = ({ handleNavigation }) => {
     setErrMsg("");
     setUsers([...users, newUser]);
 
-    localStorage.setItem("userdata", JSON.stringify(users));
+    console.log(users);
+
+    // localStorage.setItem("userdata", JSON.stringify(users));
     // setUserInput({
     //   name: "",
     //   email: "",

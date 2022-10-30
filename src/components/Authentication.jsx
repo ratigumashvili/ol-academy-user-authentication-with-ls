@@ -4,6 +4,7 @@ import Login from "./Login";
 
 const Authentication = () => {
   const [navigation, setNavigation] = useState("registration");
+  const [users, setUsers] = useState([]);
   const [notification, setNotification] = useState({
     text: "Allready have an account?",
     button: "Login",
@@ -33,15 +34,29 @@ const Authentication = () => {
         <Register
           setNavigation={setNavigation}
           handleNavigation={handleNavigation}
+          users={users}
+          setUsers={setUsers}
         />
       ) : (
-        <Login />
+        <Login users={users} />
       )}
       <div>
         {notification.text}
         <button onClick={() => handleNavigation()}>
           {notification.button}
         </button>
+      </div>
+      <div>
+        {users?.map((user, i) => (
+          <p key={i}>
+            <span>
+              <b>Name:</b> {user.name}
+            </span>{" "}
+            <span>
+              <b>Email:</b> {user.email}
+            </span>
+          </p>
+        ))}
       </div>
     </div>
   );
