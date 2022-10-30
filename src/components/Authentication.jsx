@@ -4,6 +4,7 @@ import Login from "./Login";
 import EndScreen from "./EndScreen";
 
 const Authentication = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState("");
   const [navigation, setNavigation] = useState("registration");
   const [users, setUsers] = useState([]);
 
@@ -14,9 +15,19 @@ const Authentication = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("loggedIn")) {
+      const isUser = JSON.parse(localStorage.getItem("loggedIn"));
+      setNavigation("endcreen");
+      setIsLoggedIn(isUser);
+    } else {
+      setNavigation("registration");
+    }
+  }, []);
+
   const [loggedInUser, setLoggedInUser] = useState("");
 
-  if (navigation === "endscreen") {
+  if (navigation === "endscreen" || isLoggedIn) {
     return (
       <EndScreen loggedInUser={loggedInUser} setNavigation={setNavigation} />
     );

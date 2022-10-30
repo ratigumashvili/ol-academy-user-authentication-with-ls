@@ -1,16 +1,24 @@
 import React from "react";
 
 const EndScreen = ({ loggedInUser, setNavigation }) => {
-  const { name, surname } = loggedInUser[0];
+  //   const { name, surname } = loggedInUser[0];
+  const logOut = () => {
+    localStorage.removeItem("loggedIn");
+  };
   return (
     <>
       <h1>EndScreen</h1>
-      {loggedInUser && (
+      {/* {loggedInUser && (
         <h3>
           Hello, {name} {surname}
         </h3>
-      )}
-      <button onClick={() => setNavigation("registration")}>
+      )} */}
+      <button
+        onClick={() => {
+          logOut();
+          setNavigation("registration");
+        }}
+      >
         Go home, your're drunk
       </button>
     </>

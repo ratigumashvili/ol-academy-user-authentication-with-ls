@@ -30,6 +30,7 @@ const Login = ({ users, setNavigation, setLoggedInUser }) => {
       setErrMsg(false);
       setLoggedInUser(users.filter(detectObject(email)));
       setNavigation("endscreen");
+      localStorage.setItem("loggedIn", true);
     } else {
       setLoggedInUser("");
       setErrMsg("Username or password is incorrect!");
