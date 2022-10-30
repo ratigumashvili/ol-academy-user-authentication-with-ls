@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Register from "./Register";
 import Login from "./Login";
 import EndScreen from "./EndScreen";
+import { Button } from "reactstrap";
 
 const Authentication = () => {
   const [users, setUsers] = useState([]);
@@ -55,8 +56,10 @@ const Authentication = () => {
             users={users}
             setUsers={setUsers}
           />
-          <p>Allready have an account?</p>
-          <button onClick={() => setNavigation("login")}>Login</button>
+          <span>Allready have an account?</span>
+          <Button color="link" onClick={() => setNavigation("login")}>
+            <b>Login</b>
+          </Button>
         </>
       ) : (
         <>
@@ -65,10 +68,10 @@ const Authentication = () => {
             setLoggedInUser={setLoggedInUser}
             setNavigation={setNavigation}
           />
-          <p>Do not have an account yet?</p>
-          <button onClick={() => setNavigation("registration")}>
-            Register
-          </button>
+          <span>Do not have an account yet?</span>
+          <Button color="link" onClick={() => setNavigation("registration")}>
+            <b>Register</b>
+          </Button>
         </>
       )}
       {/* <div>

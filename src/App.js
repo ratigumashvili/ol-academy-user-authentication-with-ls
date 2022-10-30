@@ -1,10 +1,11 @@
+import { Container } from "reactstrap";
 import Authentication from "./components/Authentication";
 
 function App() {
   return (
-    <div className="App">
+    <Container fluid="sm" className="app">
       <Authentication />
-    </div>
+    </Container>
   );
 }
 

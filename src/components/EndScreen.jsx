@@ -1,4 +1,4 @@
-import React from "react";
+import { Button } from "reactstrap";
 
 const EndScreen = ({ loggedInUser, setNavigation }) => {
   const logOut = () => {
@@ -10,13 +10,15 @@ const EndScreen = ({ loggedInUser, setNavigation }) => {
     <>
       <h1>EndScreen</h1>
       {loggedInUser && <h2>Hello, {loggedInUser.email}</h2>}
-      <button
+      <Button
+        color="danger"
+        className="my-4"
         onClick={() => {
           logOut();
         }}
       >
         Go home, your're drunk
-      </button>
+      </Button>
     </>
   );
 };

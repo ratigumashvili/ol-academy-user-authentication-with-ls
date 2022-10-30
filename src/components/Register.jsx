@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form, Row, Col, Input, Label, Button } from "reactstrap";
 
 const Register = ({ users, setUsers, setNavigation }) => {
   const [errMsg, setErrMsg] = useState(false);
@@ -52,41 +53,54 @@ const Register = ({ users, setUsers, setNavigation }) => {
     <>
       <h3>Register</h3>
       {errMsg && <p>{errMsg}</p>}
-      <form autoComplete="off" onSubmit={handleRegister}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          autoComplete="off"
-          value={name}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="surname"
-          placeholder="Surname"
-          autoComplete="off"
-          value={surname}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          autoComplete="off"
-          value={email}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="password"
-          placeholder="Password"
-          autoComplete="off"
-          value={password}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
+      <Form autoComplete="off" onSubmit={handleRegister}>
+        <Row>
+          <Col sm="12" md="6">
+            <Label for="name">Name</Label>
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              value={name}
+              onChange={handleInputChange}
+            />
+          </Col>
+          <Col sm="12" md="6">
+            <Label for="surname">Surname</Label>
+            <Input
+              type="text"
+              id="surname"
+              name="surname"
+              value={surname}
+              onChange={handleInputChange}
+            />
+          </Col>
+          <Col sm="12" md="6">
+            <Label for="email">Email</Label>
+            <Input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleInputChange}
+            />
+          </Col>
+          <Col sm="12" md="6">
+            <Label for="password">Password</Label>
+            <Input
+              type="text"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handleInputChange}
+            />
+          </Col>
+        </Row>
+
+        <Button color="primary" className="my-4" type="submit">
+          Submit
+        </Button>
+      </Form>
     </>
   );
 };

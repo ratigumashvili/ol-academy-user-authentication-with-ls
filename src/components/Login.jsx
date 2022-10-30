@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form, Row, Col, Input, Label, Button } from "reactstrap";
 
 const Login = ({ users, setNavigation, setLoggedInUser }) => {
   const [errMsg, setErrMsg] = useState(false);
@@ -43,25 +44,33 @@ const Login = ({ users, setNavigation, setLoggedInUser }) => {
     <>
       <h3>Login</h3>
       {errMsg && <p>{errMsg}</p>}
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          autoComplete="off"
-          value={registeredUser.email}
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="password"
-          placeholder="Password"
-          autoCapitalize="off"
-          value={registeredUser.password}
-          onChange={handleInputChange}
-        />
-        <button>Login</button>
-      </form>
+      <Form onSubmit={handleLogin}>
+        <Row>
+          <Col sm="12" md="6">
+            <Label for="email">Email</Label>
+            <Input
+              type="text"
+              id="email"
+              name="email"
+              value={registeredUser.email}
+              onChange={handleInputChange}
+            />
+          </Col>
+          <Col sm="12" md="6">
+            <Label for="password">Password</Label>
+            <Input
+              type="text"
+              id="password"
+              name="password"
+              value={registeredUser.password}
+              onChange={handleInputChange}
+            />
+          </Col>
+        </Row>
+        <Button color="primary" className="my-4" type="submit">
+          Login
+        </Button>
+      </Form>
     </>
   );
 };
