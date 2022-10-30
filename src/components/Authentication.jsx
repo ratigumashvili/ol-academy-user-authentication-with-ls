@@ -74,21 +74,6 @@ const Authentication = () => {
           </Button>
         </>
       )}
-      {/* <div>
-        {users?.map((user, i) => (
-          <p key={i}>
-            <span>
-              <b>Name:</b> {user.name}
-            </span>{" "}
-            <span>
-              <b>Email:</b> {user.email}
-            </span>
-            <span>
-              <b>Pass:</b> {user.password}
-            </span>
-          </p>
-        ))}
-      </div> */}
     </div>
   );
 };
