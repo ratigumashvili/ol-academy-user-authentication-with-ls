@@ -15,27 +15,6 @@ const Authentication = () => {
   }, []);
 
   const [loggedInUser, setLoggedInUser] = useState("");
-  const [notification, setNotification] = useState({
-    text: "Allready have an account?",
-    button: "Login",
-  });
-  const handleNavigation = () => {
-    if (navigation === "registration") {
-      setNavigation("login");
-      setNotification({
-        ...notification,
-        text: "Do not have an account yet?",
-        button: "Register",
-      });
-    } else {
-      setNavigation("registration");
-      setNotification({
-        ...notification,
-        text: "Allready have an account?",
-        button: "Login",
-      });
-    }
-  };
 
   if (navigation === "endscreen") {
     return (
@@ -47,26 +26,28 @@ const Authentication = () => {
     <div>
       <h1>Authentication</h1>
       {navigation === "registration" ? (
-        <Register
-          setNavigation={setNavigation}
-          handleNavigation={handleNavigation}
-          users={users}
-          setUsers={setUsers}
-        />
+        <>
+          <Register
+            setNavigation={setNavigation}
+            users={users}
+            setUsers={setUsers}
+          />
+          <p>Allready have an account?</p>
+          <button onClick={() => setNavigation("login")}>Login</button>
+        </>
       ) : (
-        <Login
-          users={users}
-          loggedInUser={loggedInUser}
-          setLoggedInUser={setLoggedInUser}
-          setNavigation={setNavigation}
-        />
+        <>
+          <Login
+            users={users}
+            setLoggedInUser={setLoggedInUser}
+            setNavigation={setNavigation}
+          />
+          <p>Do not have an account yet?</p>
+          <button onClick={() => setNavigation("registration")}>
+            Register
+          </button>
+        </>
       )}
-      <div>
-        {notification.text}
-        <button onClick={() => handleNavigation()}>
-          {notification.button}
-        </button>
-      </div>
       <div>
         {users?.map((user, i) => (
           <p key={i}>

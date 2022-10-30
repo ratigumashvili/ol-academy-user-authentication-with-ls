@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Login = ({ users, setNavigation, loggedInUser, setLoggedInUser }) => {
+const Login = ({ users, setNavigation, setLoggedInUser }) => {
   const [errMsg, setErrMsg] = useState(false);
   const [registeredUser, setRegisteredUser] = useState({
     email: "",
@@ -23,12 +23,12 @@ const Login = ({ users, setNavigation, loggedInUser, setLoggedInUser }) => {
           account.password === existingPassword
       );
 
-    const valueIs = (value) => (object) =>
+    const detectObject = (value) => (object) =>
       Object.values(object).some((v) => v === value);
 
     if (checkUserExists(email, password)) {
       setErrMsg(false);
-      setLoggedInUser(users.filter(valueIs(email)));
+      setLoggedInUser(users.filter(detectObject(email)));
       setNavigation("endscreen");
     } else {
       setLoggedInUser("");

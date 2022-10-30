@@ -1,15 +1,15 @@
 import { useState } from "react";
 
-const Register = ({ handleNavigation, users, setUsers }) => {
+const Register = ({ users, setUsers, setNavigation }) => {
   const [errMsg, setErrMsg] = useState(false);
-  // const [users, setUsers] = useState([]);
   const [userInput, setUserInput] = useState({
     name: "",
+    surname: "",
     email: "",
     password: "",
   });
 
-  const { name, email, password } = userInput;
+  const { name, surname, email, password } = userInput;
 
   const handleInputChange = (e) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value.trim() });
@@ -23,11 +23,12 @@ const Register = ({ handleNavigation, users, setUsers }) => {
 
     const newUser = {
       name: name,
+      surname: surname,
       email: email,
       password: password,
     };
 
-    if (!name || !email || !password) {
+    if (!name || !surname || !email || !password) {
       setErrMsg("Fields should not be empty");
       return;
     }
@@ -38,15 +39,14 @@ const Register = ({ handleNavigation, users, setUsers }) => {
     setErrMsg("");
     setUsers([...users, newUser]);
 
-    console.log(users);
-
     localStorage.setItem("userdata", JSON.stringify([...users, newUser]));
     setUserInput({
       name: "",
+      surname: "",
       email: "",
       password: "",
     });
-    handleNavigation();
+    setNavigation("login");
   };
   return (
     <>
@@ -59,6 +59,14 @@ const Register = ({ handleNavigation, users, setUsers }) => {
           placeholder="Name"
           autoComplete="off"
           value={name}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="surname"
+          placeholder="Surname"
+          autoComplete="off"
+          value={surname}
           onChange={handleInputChange}
         />
         <input
