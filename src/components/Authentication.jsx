@@ -4,9 +4,10 @@ import Login from "./Login";
 import EndScreen from "./EndScreen";
 
 const Authentication = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState("");
-  const [navigation, setNavigation] = useState("registration");
   const [users, setUsers] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState({});
+  const [navigation, setNavigation] = useState("registration");
 
   useEffect(() => {
     if (localStorage.getItem("userdata")) {
@@ -30,15 +31,17 @@ const Authentication = () => {
       const user = JSON.parse(localStorage.getItem("lastLoggedInUser"));
       setLoggedInUser(user);
     } else {
-      setLoggedInUser("");
+      setLoggedInUser({});
     }
   }, []);
 
-  const [loggedInUser, setLoggedInUser] = useState("");
-
   if (navigation === "endscreen" || isLoggedIn) {
     return (
-      <EndScreen loggedInUser={loggedInUser} setNavigation={setNavigation} />
+      <EndScreen
+        loggedInUser={loggedInUser}
+        setNavigation={setNavigation}
+        navigation={navigation}
+      />
     );
   }
 
@@ -59,7 +62,6 @@ const Authentication = () => {
         <>
           <Login
             users={users}
-            loggedInUser={loggedInUser}
             setLoggedInUser={setLoggedInUser}
             setNavigation={setNavigation}
           />
@@ -69,7 +71,7 @@ const Authentication = () => {
           </button>
         </>
       )}
-      <div>
+      {/* <div>
         {users?.map((user, i) => (
           <p key={i}>
             <span>
@@ -83,7 +85,7 @@ const Authentication = () => {
             </span>
           </p>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

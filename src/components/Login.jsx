@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Login = ({ users, setNavigation, loggedInUser, setLoggedInUser }) => {
+const Login = ({ users, setNavigation, setLoggedInUser }) => {
   const [errMsg, setErrMsg] = useState(false);
   const [registeredUser, setRegisteredUser] = useState({
     email: "",
@@ -23,15 +23,15 @@ const Login = ({ users, setNavigation, loggedInUser, setLoggedInUser }) => {
           account.password === existingPassword
       );
 
-    const detectObject = (value) => (object) =>
-      Object.values(object).some((v) => v === value);
-
     if (checkUserExists(email, password)) {
       setErrMsg(false);
-      setLoggedInUser(users.filter(detectObject(email)));
-      setNavigation("endscreen");
+
+      const newUser = { email: email };
+      setLoggedInUser(newUser);
+
       localStorage.setItem("loggedIn", true);
-      localStorage.setItem("lastLoggedInUser", JSON.stringify(loggedInUser));
+      localStorage.setItem("lastLoggedInUser", JSON.stringify(newUser));
+      setNavigation("endscreen");
     } else {
       setLoggedInUser("");
       setErrMsg("Username or password is incorrect!");
