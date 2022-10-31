@@ -27,7 +27,8 @@ const Login = ({ users, setNavigation, setLoggedInUser }) => {
     if (checkUserExists(email, password)) {
       setErrMsg(false);
 
-      const newUser = { email: email };
+      const getUser = (email) => users?.filter((item) => item.email === email);
+      const newUser = getUser(email);
       setLoggedInUser(newUser);
 
       localStorage.setItem("loggedIn", true);
