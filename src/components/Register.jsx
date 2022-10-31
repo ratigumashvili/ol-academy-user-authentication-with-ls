@@ -52,7 +52,7 @@ const Register = ({ users, setUsers, setNavigation }) => {
   return (
     <>
       <h3>Register</h3>
-      {errMsg && <p>{errMsg}</p>}
+      {errMsg && <p className="alert alert-danger">{errMsg}</p>}
       <Form onSubmit={handleRegister}>
         <Row>
           <Col sm="12" md="6">

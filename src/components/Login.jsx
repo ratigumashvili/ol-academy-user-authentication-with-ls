@@ -44,7 +44,7 @@ const Login = ({ users, setNavigation, setLoggedInUser }) => {
   return (
     <>
       <h3>Login</h3>
-      {errMsg && <p>{errMsg}</p>}
+      {errMsg && <p className="alert alert-danger">{errMsg}</p>}
       <Form onSubmit={handleLogin}>
         <Row>
           <Col sm="12" md="6">
