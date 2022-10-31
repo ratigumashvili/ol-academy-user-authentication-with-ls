@@ -9,7 +9,11 @@ const EndScreen = ({ loggedInUser, setNavigation }) => {
   return (
     <>
       <h1>EndScreen</h1>
-      {loggedInUser && <h2>Hello, {loggedInUser.email}</h2>}
+      {loggedInUser && (
+        <h2>
+          Hello, {loggedInUser[0]?.name} {loggedInUser[0]?.surname}
+        </h2>
+      )}
       <Button
         color="danger"
         className="my-4"
