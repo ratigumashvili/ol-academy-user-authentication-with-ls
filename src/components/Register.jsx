@@ -53,7 +53,7 @@ const Register = ({ users, setUsers, setNavigation }) => {
     <>
       <h3>Register</h3>
       {errMsg && <p>{errMsg}</p>}
-      <Form autoComplete="off" onSubmit={handleRegister}>
+      <Form onSubmit={handleRegister}>
         <Row>
           <Col sm="12" md="6">
             <Label for="name">Name</Label>
@@ -78,9 +78,10 @@ const Register = ({ users, setUsers, setNavigation }) => {
           <Col sm="12" md="6">
             <Label for="email">Email</Label>
             <Input
-              type="text"
+              type="email"
               id="email"
               name="email"
+              autoComplete="off"
               value={email}
               onChange={handleInputChange}
             />
@@ -88,9 +89,10 @@ const Register = ({ users, setUsers, setNavigation }) => {
           <Col sm="12" md="6">
             <Label for="password">Password</Label>
             <Input
-              type="text"
+              type="password"
               id="password"
               name="password"
+              autoComplete="new-password"
               value={password}
               onChange={handleInputChange}
             />

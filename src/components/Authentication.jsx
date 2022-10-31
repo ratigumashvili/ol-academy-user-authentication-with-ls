@@ -49,7 +49,7 @@ const Authentication = () => {
   return (
     <div>
       <h1>Authentication</h1>
-      {navigation === "registration" ? (
+      {navigation === "registration" && (
         <>
           <Register
             setNavigation={setNavigation}
@@ -61,7 +61,8 @@ const Authentication = () => {
             <b>Login</b>
           </Button>
         </>
-      ) : (
+      )}
+      {navigation === "login" && (
         <>
           <Login
             users={users}

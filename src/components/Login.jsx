@@ -49,9 +49,10 @@ const Login = ({ users, setNavigation, setLoggedInUser }) => {
           <Col sm="12" md="6">
             <Label for="email">Email</Label>
             <Input
-              type="text"
+              type="email"
               id="email"
               name="email"
+              autoComplete="off"
               value={registeredUser.email}
               onChange={handleInputChange}
             />
@@ -59,9 +60,10 @@ const Login = ({ users, setNavigation, setLoggedInUser }) => {
           <Col sm="12" md="6">
             <Label for="password">Password</Label>
             <Input
-              type="text"
+              type="password"
               id="password"
               name="password"
+              autoComplete="new-password"
               value={registeredUser.password}
               onChange={handleInputChange}
             />
